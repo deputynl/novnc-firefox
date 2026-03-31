@@ -25,8 +25,28 @@ Open **http://localhost:6080/** in your browser — you land directly in the liv
 
 ## With Docker Compose
 
-```bash
-docker compose up -d
+Save the following as `docker-compose.yml` and run `docker compose up -d`:
+
+```yaml
+services:
+  firefox:
+    image: ghcr.io/deputynl/novnc-firefox:latest
+    ports:
+      - "6080:6080"
+    restart: unless-stopped
+```
+
+Open **http://localhost:6080/** — the session starts automatically.
+
+If you are running this behind a reverse proxy and want to bind only to localhost:
+
+```yaml
+services:
+  firefox:
+    image: ghcr.io/deputynl/novnc-firefox:latest
+    ports:
+      - "127.0.0.1:6080:6080"
+    restart: unless-stopped
 ```
 
 ## Features
