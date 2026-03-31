@@ -1,6 +1,6 @@
 services:
   firefox:
-    image: ghcr.io/depuytnl/novnc-firefox:latest
+    image: ghcr.io/deputynl/novnc-firefox:latest
     ports:
       - "6080:6080"
     restart: unless-stopped

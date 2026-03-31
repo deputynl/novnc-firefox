@@ -18,7 +18,7 @@ A minimal Docker container that serves a Firefox ESR browser session accessible 
 ## Quick start
 
 ```bash
-docker run -d -p 6080:6080 ghcr.io/depuytnl/novnc-firefox:latest
+docker run -d -p 6080:6080 ghcr.io/deputynl/novnc-firefox:latest
 ```
 
 Open **http://localhost:6080/** in your browser — you land directly in the live Firefox session. No VNC client, no password.
@@ -49,7 +49,7 @@ The raw VNC port (5901) is bound to localhost only inside the container and is n
 Requires Docker buildx. Authenticate to the GitHub Container Registry first:
 
 ```bash
-echo $GITHUB_TOKEN | docker login ghcr.io -u depuytnl --password-stdin
+echo $GITHUB_TOKEN | docker login ghcr.io -u deputynl --password-stdin
 ```
 
 Then build and push a versioned multi-arch image:

@@ -2,7 +2,7 @@
 set -e
 
 VERSION=${1:-latest}
-IMAGE=ghcr.io/depuytnl/novnc-firefox
+IMAGE=ghcr.io/deputynl/novnc-firefox
 
 # Create or reuse a multi-arch builder
 docker buildx inspect multiarch-builder > /dev/null 2>&1 || \
