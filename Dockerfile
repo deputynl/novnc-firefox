@@ -28,6 +28,10 @@ RUN printf '<html><head><meta http-equiv="refresh" content="0;url=vnc.html?autoc
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+LABEL org.opencontainers.image.source="https://github.com/deputynl/novnc-firefox"
+LABEL org.opencontainers.image.description="Minimal Docker container serving Firefox ESR over a browser-accessible VNC session via noVNC"
+LABEL org.opencontainers.image.licenses="MIT"
+
 EXPOSE 6080
 
 USER user
