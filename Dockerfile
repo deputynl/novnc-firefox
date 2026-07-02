@@ -34,6 +34,11 @@ RUN printf '<html><head><meta http-equiv="refresh" content="0;url=vnc.html?autoc
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# Reduce memory footprint: single content process, no separate network/media-decoder
+# processes, and a capped cache — this is a single-user, single-tab kiosk browser, so
+# the isolation those processes normally buy has little value here.
+COPY policies.json /usr/lib/firefox/distribution/policies.json
+
 LABEL org.opencontainers.image.source="https://github.com/deputynl/novnc-firefox"
 LABEL org.opencontainers.image.description="Minimal Docker container serving Firefox over a browser-accessible VNC session via noVNC"
 LABEL org.opencontainers.image.licenses="MIT"

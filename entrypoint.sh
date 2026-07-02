@@ -26,8 +26,9 @@ openbox &
 # Start terminal
 xterm &
 
-# Start Firefox
-firefox &
+# Start Firefox (about:blank avoids loading the Activity Stream new-tab page,
+# which pulls in Pocket/sponsored content from several origins on startup)
+firefox about:blank &
 
 # Serve noVNC and proxy WebSocket -> VNC (foreground, keeps container alive)
 exec websockify --web /usr/share/novnc 6080 localhost:5901

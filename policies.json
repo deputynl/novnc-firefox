@@ -1,0 +1,20 @@
+{
+  "policies": {
+    "Preferences": {
+      "dom.ipc.processCount": { "Value": 1, "Status": "default" },
+      "dom.ipc.processCount.webIsolated": { "Value": 1, "Status": "default" },
+      "network.process.enabled": { "Value": false, "Status": "default" },
+      "media.rdd-process.enabled": { "Value": false, "Status": "default" },
+      "media.gmp-provider.enabled": { "Value": false, "Status": "default" },
+      "browser.cache.memory.capacity": { "Value": 65536, "Status": "default" },
+      "browser.sessionstore.max_tabs_undo": { "Value": 0, "Status": "default" },
+      "browser.sessionstore.max_windows_undo": { "Value": 0, "Status": "default" },
+      "browser.newtabpage.enabled": { "Value": false, "Status": "default" },
+      "browser.newtab.url": { "Value": "about:blank", "Status": "default" },
+      "browser.startup.page": { "Value": 0, "Status": "default" }
+    },
+    "DisableTelemetry": true,
+    "DisablePocket": true,
+    "DisableFirefoxStudies": true
+  }
+}
