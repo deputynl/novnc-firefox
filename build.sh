@@ -1,7 +1,24 @@
 #!/bin/bash
 set -e
 
-VERSION=${1:-latest}
+if [ -n "$1" ]; then
+    VERSION=$1
+else
+    CURRENT=$(cat VERSION)
+    MAJOR=$(echo "$CURRENT" | cut -d. -f1)
+    MINOR=$(echo "$CURRENT" | cut -d. -f2)
+    PATCH=$(echo "$CURRENT" | cut -d. -f3)
+    PATCH=$((PATCH + 1))
+    VERSION="${MAJOR}.${MINOR}.${PATCH}"
+    echo "Auto-incremented version: ${CURRENT} -> ${VERSION}"
+fi
+
+if git rev-parse "v${VERSION}" >/dev/null 2>&1; then
+    echo "Tag v${VERSION} already exists — aborting before build."
+    exit 1
+fi
+
+echo "$VERSION" > VERSION
 IMAGE=ghcr.io/deputynl/novnc-firefox
 
 # Create or reuse a multi-arch builder
@@ -22,3 +39,9 @@ echo ""
 echo "Done. Pushed:"
 echo "  ${IMAGE}:${VERSION}"
 echo "  ${IMAGE}:latest"
+
+git add -u
+git commit -m "Release v${VERSION}"
+git tag "v${VERSION}"
+git push origin main "v${VERSION}"
+gh release create "v${VERSION}" --title "v${VERSION}" --generate-notes

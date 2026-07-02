@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tigervnc-standalone-server \
     openbox \
     xterm \
-    firefox-esr \
     novnc \
     python3-websockify \
     fonts-dejavu-core \
@@ -15,6 +14,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     net-tools \
     openssh-client \
     sudo \
+    wget \
+    ca-certificates \
+    && install -d -m 0755 /etc/apt/keyrings \
+    && wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O /etc/apt/keyrings/packages.mozilla.org.asc \
+    && echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" \
+       > /etc/apt/sources.list.d/mozilla.list \
+    && apt-get update && apt-get install -y --no-install-recommends firefox \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -s /bin/bash user \
@@ -29,8 +35,11 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 LABEL org.opencontainers.image.source="https://github.com/deputynl/novnc-firefox"
-LABEL org.opencontainers.image.description="Minimal Docker container serving Firefox ESR over a browser-accessible VNC session via noVNC"
+LABEL org.opencontainers.image.description="Minimal Docker container serving Firefox over a browser-accessible VNC session via noVNC"
 LABEL org.opencontainers.image.licenses="MIT"
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD wget -qO- http://localhost:6080/ > /dev/null || exit 1
 
 EXPOSE 6080
 

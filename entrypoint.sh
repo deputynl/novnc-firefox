@@ -26,5 +26,8 @@ openbox &
 # Start terminal
 xterm &
 
+# Start Firefox
+firefox &
+
 # Serve noVNC and proxy WebSocket -> VNC (foreground, keeps container alive)
 exec websockify --web /usr/share/novnc 6080 localhost:5901
